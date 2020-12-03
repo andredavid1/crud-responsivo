@@ -1,3 +1,3 @@
 # Sistema CRUD Responsivo
 
-App responsivo utilizando HTML, css, javascript, React.js
+Sistema CRUD responsivo. React.js, HTML, CSS, json-server
