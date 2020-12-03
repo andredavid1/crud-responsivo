@@ -8,44 +8,84 @@ export const Container = styled.div`
 `;
 
 export const Table = styled.table`
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
   border-collapse: collapse;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  overflow: hidden;
   width: 100%;
 
-  tbody tr:nth-child(odd) {
-    background: yellow;
+  th,
+  th button {
+    background: #000080;
+    font-size: 1.6rem;
+    color: #fff;
   }
 
   th,
   td {
-    border: 1px solid #312e28;
-    color: #312e28;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    padding: 4px;
+    padding: 0.3rem;
+    border: 0.1rem solid #802c00;
+    text-align: center !important;
     white-space: nowrap;
   }
 
-  th {
-    font-size: 18px;
-    font-weight: 700;
+  td {
+    font-size: 1.2rem;
   }
 
-  td {
-    font-size: 14px;
+  tbody tr {
+    color: #312e38;
+  }
 
-    button {
-      background: none;
-      color: green;
-      border: none;
+  tbody tr:nth-child(even) {
+    background: #ccc;
+  }
+
+  tbody tr:hover {
+    background: #19c589;
+    color: #ffffff;
+  }
+
+  tbody tr:hover button {
+    color: #ffffff;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: green;
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
     }
+  }
 
-    button + button {
-      color: darkgoldenrod;
-      margin-left: 3px;
-    }
+  button + button {
+    color: darkgoldenrod;
+    margin-left: 0.5rem;
+  }
 
-    button + button + button {
-      color: darkred;
+  button + button + button {
+    color: #800000;
+  }
+
+  tfoot tr td {
+    font-size: 1.4rem;
+    color: #312e38;
+    padding: 1rem;
+
+    span {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+
+      strong {
+        padding: 0 5px;
+        font-family: Ubuntu, serif;
+      }
     }
   }
 `;
