@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaEdit, FaSearch, FaTrashAlt } from 'react-icons/fa';
 
+import Pagination from '../Pagination';
+
 import { Container, Table } from './stylesTable';
 
 const TableCategories = () => {
@@ -10,7 +12,7 @@ const TableCategories = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Categoria</th>
+            <th className="bigger">Categoria</th>
             <th>{/* Actions */}</th>
           </tr>
         </thead>
@@ -19,13 +21,13 @@ const TableCategories = () => {
             <td>1</td>
             <td>Categoria 1</td>
             <td>
-              <button type="button">
+              <button type="button" title="detalhes">
                 <FaSearch />
               </button>
-              <button type="button">
+              <button type="button" title="editar">
                 <FaEdit />
               </button>
-              <button type="button">
+              <button type="button" title="excluir">
                 <FaTrashAlt />
               </button>
             </td>
@@ -91,6 +93,14 @@ const TableCategories = () => {
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          {/* Se não houver registros não exibe nada */}
+          <tr>
+            <td colSpan={3}>
+              <Pagination />
+            </td>
+          </tr>
+        </tfoot>
       </Table>
     </Container>
   );

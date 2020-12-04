@@ -2,11 +2,26 @@ import React from 'react';
 import { FaPlusCircle, FaPrint } from 'react-icons/fa';
 import { FiXCircle } from 'react-icons/fi';
 
-import { ButtonArea, Container, InputContainer, SearchArea } from './styles';
+import {
+  ButtonArea,
+  Container,
+  InputContainer,
+  LimitArea,
+  SearchArea,
+} from './styles';
 
 const ActionsBar: React.FC = () => {
   return (
     <Container>
+      <LimitArea>
+        <select name="limit" id="limit" title="resultados/página">
+          <option value={0}>Todos</option>
+          <option value={1}>10</option>
+          <option value={2}>25</option>
+          <option value={3}>50</option>
+          <option value={4}>100</option>
+        </select>
+      </LimitArea>
       <ButtonArea>
         <button type="button">
           <FaPlusCircle />

@@ -8,13 +8,21 @@ export const Container = styled.div`
   width: 100%;
 `;
 
+export const LimitArea = styled.div`
+  width: 25%;
+
+  select {
+    border-radius: 10%;
+  }
+`;
+
 export const ButtonArea = styled.div`
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: flex-end;
   padding: 0 10px;
-  width: 55%;
+  width: 30%;
 
   > button {
     align-items: center;
@@ -22,7 +30,7 @@ export const ButtonArea = styled.div`
     display: flex;
     border: none;
     color: #000080;
-    font-size: 20px;
+    font-size: 16px;
 
     > span {
       display: none;
@@ -35,7 +43,10 @@ export const ButtonArea = styled.div`
 `;
 
 export const SearchArea = styled.div`
+  display: flex;
   height: 30px;
+  justify-content: flex-end;
+  max-width: 200px;
   width: 45%;
 `;
 

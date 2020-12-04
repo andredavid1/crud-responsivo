@@ -31,6 +31,10 @@ export const Table = styled.table`
     white-space: nowrap;
   }
 
+  .bigger {
+    width: 50%;
+  }
+
   td {
     font-size: 1.2rem;
   }
@@ -75,7 +79,6 @@ export const Table = styled.table`
   tfoot tr td {
     font-size: 1.4rem;
     color: #312e38;
-    padding: 1rem;
 
     span {
       width: 100%;
@@ -84,7 +87,6 @@ export const Table = styled.table`
 
       strong {
         padding: 0 5px;
-        font-family: Ubuntu, serif;
       }
     }
   }
