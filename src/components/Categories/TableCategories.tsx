@@ -13,9 +13,14 @@ interface ICategory {
 interface IProps {
   data: ICategory[];
   handleEditCategory: (category: ICategory) => void;
+  handleDeleteCategory: (category: number) => void;
 }
 
-const TableCategories: React.FC<IProps> = ({ data, handleEditCategory }) => {
+const TableCategories: React.FC<IProps> = ({
+  data,
+  handleEditCategory,
+  handleDeleteCategory,
+}) => {
   return (
     <Container>
       <Table>
@@ -51,7 +56,13 @@ const TableCategories: React.FC<IProps> = ({ data, handleEditCategory }) => {
                   >
                     <FaEdit />
                   </button>
-                  <button type="button" title="excluir">
+                  <button
+                    type="button"
+                    title="excluir"
+                    onClick={() => {
+                      handleDeleteCategory(category.id);
+                    }}
+                  >
                     <FaTrashAlt />
                   </button>
                 </td>

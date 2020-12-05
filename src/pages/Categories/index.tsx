@@ -42,6 +42,14 @@ const Categories: React.FC = () => {
     }
   }
 
+  async function handleDeleteCategory(id: number): Promise<void> {
+    await api.delete(`/categories/${id}`);
+
+    const updatedState = categories.filter(category => category.id !== id);
+
+    setCategories(updatedState);
+  }
+
   function handleEditCategory(category: ICategory): void {
     setEditingCategory(category);
     setEditModalOpen(true);
@@ -84,6 +92,7 @@ const Categories: React.FC = () => {
       <TableCategories
         data={categories}
         handleEditCategory={handleEditCategory}
+        handleDeleteCategory={handleDeleteCategory}
       />
 
       <ModalAddCategory
