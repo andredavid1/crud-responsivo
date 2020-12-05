@@ -10,7 +10,11 @@ import {
   SearchArea,
 } from './styles';
 
-const ActionsBar: React.FC = () => {
+interface IProps {
+  openModal: () => void;
+}
+
+const ActionsBar: React.FC<IProps> = ({ openModal }) => {
   return (
     <Container>
       <LimitArea>
@@ -23,7 +27,12 @@ const ActionsBar: React.FC = () => {
         </select>
       </LimitArea>
       <ButtonArea>
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => {
+            openModal();
+          }}
+        >
           <FaPlusCircle />
           <span>Cadastrar</span>
         </button>

@@ -5,7 +5,17 @@ import Pagination from '../Pagination';
 
 import { Container, Table } from './stylesTable';
 
-const TableCategories = () => {
+interface ICategory {
+  id: number;
+  name: string;
+}
+
+interface IProps {
+  data: ICategory[];
+  handleEditCategory: (category: ICategory) => void;
+}
+
+const TableCategories: React.FC<IProps> = ({ data, handleEditCategory }) => {
   return (
     <Container>
       <Table>
@@ -17,81 +27,36 @@ const TableCategories = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Categoria 1</td>
-            <td>
-              <button type="button" title="detalhes">
-                <FaSearch />
-              </button>
-              <button type="button" title="editar">
-                <FaEdit />
-              </button>
-              <button type="button" title="excluir">
-                <FaTrashAlt />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Categoria 1</td>
-            <td>
-              <button type="button">
-                <FaSearch />
-              </button>
-              <button type="button">
-                <FaEdit />
-              </button>
-              <button type="button">
-                <FaTrashAlt />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Categoria 1</td>
-            <td>
-              <button type="button">
-                <FaSearch />
-              </button>
-              <button type="button">
-                <FaEdit />
-              </button>
-              <button type="button">
-                <FaTrashAlt />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Categoria 1</td>
-            <td>
-              <button type="button">
-                <FaSearch />
-              </button>
-              <button type="button">
-                <FaEdit />
-              </button>
-              <button type="button">
-                <FaTrashAlt />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Categoria 1</td>
-            <td>
-              <button type="button">
-                <FaSearch />
-              </button>
-              <button type="button">
-                <FaEdit />
-              </button>
-              <button type="button">
-                <FaTrashAlt />
-              </button>
-            </td>
-          </tr>
+          {!data && (
+            <tr>
+              <td colSpan={3}>Nenum registro foi encontrado.</td>
+            </tr>
+          )}
+
+          {data &&
+            data.map(category => (
+              <tr key={category.id}>
+                <td>{category.id}</td>
+                <td>{category.name}</td>
+                <td>
+                  <button type="button" title="detalhes">
+                    <FaSearch />
+                  </button>
+                  <button
+                    type="button"
+                    title="editar"
+                    onClick={() => {
+                      handleEditCategory(category);
+                    }}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button type="button" title="excluir">
+                    <FaTrashAlt />
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
         <tfoot>
           {/* Se não houver registros não exibe nada */}
