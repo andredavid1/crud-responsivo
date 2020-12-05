@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import { Form as Unform } from '@unform/web';
+import { Form as UnForm } from '@unform/web';
 
-export const Form = styled(Unform)`
+export const Form = styled(UnForm)`
   padding: 30px 20px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 
   h1 {
@@ -17,7 +15,7 @@ export const Form = styled(Unform)`
   }
 
   button {
-    margin-top: 48px;
+    margin-top: 36px;
     align-self: flex-end;
   }
 

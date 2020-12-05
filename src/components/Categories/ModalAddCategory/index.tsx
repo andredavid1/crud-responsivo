@@ -2,9 +2,11 @@ import React, { useRef, useCallback } from 'react';
 
 import { FiCheckSquare } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
+// import { Form } from '@unform/web';
 import Modal from '../../Modal';
 import Input from '../../Input';
+
+import { Form } from './styles';
 
 interface ICategory {
   id: number;
@@ -43,9 +45,9 @@ const ModalAddCategory: React.FC<IModalProps> = ({
         <Input name="name" placeholder="categoria" />
 
         <button type="submit" data-testid="add-category-button">
-          <p className="text">Adicionar Categoria</p>
+          <p className="text">Salvar</p>
           <div className="icon">
-            <FiCheckSquare size={24} />
+            <FiCheckSquare size={18} />
           </div>
         </button>
       </Form>

@@ -11,12 +11,12 @@ export const Container = styled.div<IContainerProps>`
 
   background: #fff;
   border-radius: 8px;
-  padding: 18px 24px;
+  padding: 10px 16px;
   width: 100%;
   font-size: 16px;
 
   & + div {
-    margin-top: 24px;
+    margin-top: 16px;
   }
 
   h1 {
@@ -43,7 +43,7 @@ export const Container = styled.div<IContainerProps>`
     flex: 1;
     background: transparent;
     border: 0;
-    color: #b7b7cc;
+    color: #312e28;
 
     &::placeholder {
       color: #b7b7cc;

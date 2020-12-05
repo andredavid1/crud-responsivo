@@ -1,19 +1,21 @@
 import styled from 'styled-components';
+import { Form as UnForm } from '@unform/web';
 
-export const Form = styled.form`
-  padding: 48px 40px;
+export const Form = styled(UnForm)`
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
 
   h1 {
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 36px;
+    font-weight: 700;
+    font-size: 1.9rem;
     margin-bottom: 40px;
+    text-align: center;
+    width: 100%;
   }
 
   button {
-    margin-top: 48px;
+    margin-top: 36px;
     align-self: flex-end;
   }
 
@@ -29,14 +31,14 @@ export const Form = styled.form`
     align-items: center;
 
     .text {
-      padding: 16px 24px;
+      padding: 8px 3px 8px 10px;
     }
 
     .icon {
       display: flex;
-      padding: 16px 16px;
-      background: #41c900;
-      border-radius: 0 8px 8px 0;
+      padding: 8px 12px 8px 3px;
+      background: none;
+      border: none;
       margin: 0 auto;
     }
   }
