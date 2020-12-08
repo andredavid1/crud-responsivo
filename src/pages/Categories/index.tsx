@@ -65,7 +65,7 @@ const Categories: React.FC = () => {
       setMessageAlert('Categoria criada com sucesso.');
     } catch (err) {
       setTypeAlert('error');
-      setMessageAlert(`Erro ao cadastrar a categoria ${err}`);
+      setMessageAlert(`Erro ao cadastrar a categoria ${err.message}`);
     }
   }
 
@@ -86,7 +86,7 @@ const Categories: React.FC = () => {
       setMessageAlert('Categoria deletada com sucesso.');
     } catch (err) {
       setTypeAlert('error');
-      setMessageAlert(`Erro ao deletar a categoria ${err}`);
+      setMessageAlert(`Erro ao deletar a categoria ${err.message}`);
     }
   }
 
@@ -121,7 +121,7 @@ const Categories: React.FC = () => {
       setMessageAlert('Categoria atualizada com sucesso.');
     } catch (err) {
       setTypeAlert('error');
-      setMessageAlert(`Erro ao atualizar a categoria ${err}`);
+      setMessageAlert(`Erro ao atualizar a categoria ${err.message}`);
     }
   }
 

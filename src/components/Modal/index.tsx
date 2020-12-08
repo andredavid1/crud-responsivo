@@ -35,7 +35,7 @@ const Modal: React.FC<IModalProps> = ({ children, isOpen, setIsOpen }) => {
           color: '#000000',
           left: '50%',
           marginRight: '-50%',
-          maxWidth: '800px',
+          maxWidth: '400px',
           padding: 0,
           right: 'auto',
           top: '50%',

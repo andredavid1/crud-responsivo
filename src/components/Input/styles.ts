@@ -15,7 +15,7 @@ export const Label = styled.label`
   text-transform: capitalize;
   padding: 10px 16px;
   font-size: 16px;
-  width: 30%;
+  width: 15%;
 `;
 
 export const InputContainer = styled.div<IContainerProps>`
@@ -24,7 +24,7 @@ export const InputContainer = styled.div<IContainerProps>`
   border-radius: 8px;
   padding: 10px 16px;
   font-size: 16px;
-  width: 70%;
+  width: 85%;
 
   & + div {
     margin-top: 16px;
