@@ -32,12 +32,13 @@ const ActionsBar: React.FC<IProps> = ({ openModal }) => {
           onClick={() => {
             openModal();
           }}
+          title="cadastrar"
         >
           <FaPlusCircle />
           <span>Cadastrar</span>
         </button>
 
-        <button type="button">
+        <button type="button" title="imprimir">
           <FaPrint />
           <span>Imprimir</span>
         </button>
@@ -45,7 +46,7 @@ const ActionsBar: React.FC<IProps> = ({ openModal }) => {
       <SearchArea>
         <InputContainer>
           <input type="text" name="search" placeholder="pesquisar" />
-          <button type="button">
+          <button type="button" title="cancelar">
             <FiXCircle />
           </button>
         </InputContainer>

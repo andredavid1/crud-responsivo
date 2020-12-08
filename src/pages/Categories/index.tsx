@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ActionsBar from '../../components/ActionsBar';
 import ModalAddCategory from '../../components/Categories/ModalAddCategory';
 import ModalEditCategory from '../../components/Categories/ModalEditCategory';
+import ModalShowCategory from '../../components/Categories/ModalShowCategory';
 import TableCategories from '../../components/Categories/TableCategories';
 import api from '../../services/api';
 
@@ -17,7 +18,8 @@ const Categories: React.FC = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editingCategory, setEditingCategory] = useState<ICategory>(
+  const [showModalOpen, setShowModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<ICategory>(
     {} as ICategory,
   );
 
@@ -27,6 +29,10 @@ const Categories: React.FC = () => {
 
   function toggleEditModal(): void {
     setEditModalOpen(!editModalOpen);
+  }
+
+  function toggleShowModal(): void {
+    setShowModalOpen(!showModalOpen);
   }
 
   async function handleAddCategory(
@@ -51,19 +57,24 @@ const Categories: React.FC = () => {
   }
 
   function handleEditCategory(category: ICategory): void {
-    setEditingCategory(category);
+    setSelectedCategory(category);
     setEditModalOpen(true);
+  }
+
+  function handleShowCategory(category: ICategory): void {
+    setSelectedCategory(category);
+    setShowModalOpen(true);
   }
 
   async function handleUpdateCategory(
     category: Omit<ICategory, 'id'>,
   ): Promise<void> {
-    const { id } = editingCategory;
+    const { id } = selectedCategory;
 
     const updatedCategory = { id, ...category };
 
     const response = await api.put(
-      `/categories/${editingCategory.id}`,
+      `/categories/${selectedCategory.id}`,
       updatedCategory,
     );
 
@@ -93,6 +104,7 @@ const Categories: React.FC = () => {
         data={categories}
         handleEditCategory={handleEditCategory}
         handleDeleteCategory={handleDeleteCategory}
+        handleShowCategory={handleShowCategory}
       />
 
       <ModalAddCategory
@@ -104,8 +116,14 @@ const Categories: React.FC = () => {
       <ModalEditCategory
         isOpen={editModalOpen}
         setIsOpen={toggleEditModal}
-        editingCategory={editingCategory}
+        selectedCategory={selectedCategory}
         handleUpdateCategory={handleUpdateCategory}
+      />
+
+      <ModalShowCategory
+        isOpen={showModalOpen}
+        setIsOpen={toggleShowModal}
+        selectedCategory={selectedCategory}
       />
     </Container>
   );

@@ -14,12 +14,14 @@ interface IProps {
   data: ICategory[];
   handleEditCategory: (category: ICategory) => void;
   handleDeleteCategory: (category: number) => void;
+  handleShowCategory: (category: ICategory) => void;
 }
 
 const TableCategories: React.FC<IProps> = ({
   data,
   handleEditCategory,
   handleDeleteCategory,
+  handleShowCategory,
 }) => {
   return (
     <Container>
@@ -44,7 +46,13 @@ const TableCategories: React.FC<IProps> = ({
                 <td>{category.id}</td>
                 <td>{category.name}</td>
                 <td>
-                  <button type="button" title="detalhes">
+                  <button
+                    type="button"
+                    title="detalhes"
+                    onClick={() => {
+                      handleShowCategory(category);
+                    }}
+                  >
                     <FaSearch />
                   </button>
                   <button

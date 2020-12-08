@@ -41,7 +41,7 @@ const ModalAddCategory: React.FC<IModalProps> = ({
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Nova Categoria</h1>
+        <h1>Cadastrar categoria</h1>
         <Input name="name" placeholder="categoria" />
 
         <button type="submit" data-testid="add-category-button">

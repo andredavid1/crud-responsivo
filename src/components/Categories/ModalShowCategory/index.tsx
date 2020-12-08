@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 
-import { FiCheckSquare } from 'react-icons/fi';
+import { FiXCircle } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from './styles';
 import Modal from '../../Modal';
@@ -14,29 +14,19 @@ interface ICategory {
 interface IModalProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleUpdateCategory: (category: Omit<ICategory, 'id'>) => void;
   selectedCategory: ICategory;
 }
 
-interface IEditCategoryData {
-  name: string;
-}
-
-const ModalEditCategory: React.FC<IModalProps> = ({
+const ModalShowCategory: React.FC<IModalProps> = ({
   isOpen,
   setIsOpen,
   selectedCategory,
-  handleUpdateCategory,
 }) => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(
-    async (data: IEditCategoryData) => {
-      handleUpdateCategory(data);
-      setIsOpen();
-    },
-    [handleUpdateCategory, setIsOpen],
-  );
+  const handleSubmit = useCallback(async () => {
+    setIsOpen();
+  }, [setIsOpen]);
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -45,17 +35,21 @@ const ModalEditCategory: React.FC<IModalProps> = ({
         onSubmit={handleSubmit}
         initialData={selectedCategory}
       >
-        <h1>Editar categoria</h1>
-        <Input name="name" placeholder="Categoria" />
+        <h1>Detalhes da Categoria</h1>
+        <label htmlFor="idCategory">Id:</label>
+        <Input id="idCategory" name="id" disabled />
+        <label htmlFor="name">Nome:</label>
+        <Input id="name" name="name" disabled />
 
         <button
-          type="submit"
-          data-testid="edit-category-button"
-          title="Atualizar"
+          data-testid="noShow-category-button"
+          title="Fechar"
+          type="button"
+          onClick={setIsOpen}
         >
-          <div className="text">Atualizar</div>
+          <div className="text">Fechar</div>
           <div className="icon">
-            <FiCheckSquare size={18} />
+            <FiXCircle size={18} />
           </div>
         </button>
       </Form>
@@ -63,4 +57,4 @@ const ModalEditCategory: React.FC<IModalProps> = ({
   );
 };
 
-export default ModalEditCategory;
+export default ModalShowCategory;
