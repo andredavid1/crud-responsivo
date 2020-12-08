@@ -5,15 +5,26 @@ interface IContainerProps {
   isFilled: boolean;
 }
 
-export const Container = styled.div<IContainerProps>`
+export const Container = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+`;
 
+export const Label = styled.label`
+  text-transform: capitalize;
+  padding: 10px 16px;
+  font-size: 16px;
+  width: 30%;
+`;
+
+export const InputContainer = styled.div<IContainerProps>`
   background: #fff;
+  border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px 16px;
-  width: 100%;
   font-size: 16px;
+  width: 70%;
 
   & + div {
     margin-top: 16px;
@@ -30,7 +41,7 @@ export const Container = styled.div<IContainerProps>`
     props.isFocused &&
     css`
       color: #ff9000;
-      border-color: #ff9000;
+      border-color: #000080;
     `}
 
   ${props =>

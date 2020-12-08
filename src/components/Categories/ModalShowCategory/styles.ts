@@ -7,23 +7,35 @@ export const Form = styled(UnForm)`
   flex-direction: column;
 
   h1 {
+    color: #312e28;
     font-weight: 700;
     font-size: 1.9rem;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-align: center;
     width: 100%;
   }
 
+  label {
+    color: #404040;
+    font-weight: 700;
+    margin: 6px 0;
+    padding-left: 5px;
+  }
+
+  .btnModal {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+
   button {
-    margin-top: 36px;
-    align-self: flex-end;
+    align-self: center;
   }
 
   button {
     font-weight: 600;
     border-radius: 8px;
     border: 0;
-    background: #39b100;
     color: #fff;
 
     display: flex;
@@ -31,15 +43,19 @@ export const Form = styled(UnForm)`
     align-items: center;
 
     .text {
-      padding: 8px 3px 8px 10px;
+      padding: 8px 10px;
     }
+  }
 
-    .icon {
-      display: flex;
-      padding: 8px 12px 8px 3px;
-      background: none;
-      border: none;
-      margin: 0 auto;
-    }
+  button + button {
+    margin-left: 10px;
+  }
+
+  .btnGreen {
+    background-color: #008000;
+  }
+
+  .btnRed {
+    background-color: #800000;
   }
 `;

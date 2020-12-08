@@ -13,19 +13,25 @@ interface ICategory {
 interface IModalProps {
   isOpen: boolean;
   setIsOpen: () => void;
+  handleDeleteCategory: (category: ICategory) => void;
   selectedCategory: ICategory;
 }
 
-const ModalShowCategory: React.FC<IModalProps> = ({
+const ModalEditCategory: React.FC<IModalProps> = ({
   isOpen,
   setIsOpen,
   selectedCategory,
+  handleDeleteCategory,
 }) => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async () => {
-    setIsOpen();
-  }, [setIsOpen]);
+  const handleSubmit = useCallback(
+    async (data: ICategory) => {
+      handleDeleteCategory(data);
+      setIsOpen();
+    },
+    [handleDeleteCategory, setIsOpen],
+  );
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -34,20 +40,29 @@ const ModalShowCategory: React.FC<IModalProps> = ({
         onSubmit={handleSubmit}
         initialData={selectedCategory}
       >
-        <h1>Detalhes da Categoria</h1>
+        <h1>Deseja realmente excluir essa categoria?</h1>
 
         <Input name="id" label="Id" disabled />
         <Input name="name" label="Nome" disabled />
 
         <div className="btnModal">
           <button
-            className="btnGreen"
+            className="btnRed"
             data-testid="noShow-category-button"
-            title="Fechar"
+            title="cancelar"
             type="button"
             onClick={setIsOpen}
           >
-            <p className="text">Fechar</p>
+            <p className="text">Cancelar</p>
+          </button>
+
+          <button
+            className="btnGreen"
+            data-testid="edit-category-button"
+            title="atualizar"
+            type="submit"
+          >
+            <p className="text">Deletar</p>
           </button>
         </div>
       </Form>
@@ -55,4 +70,4 @@ const ModalShowCategory: React.FC<IModalProps> = ({
   );
 };
 
-export default ModalShowCategory;
+export default ModalEditCategory;

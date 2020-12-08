@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import ActionsBar from '../../components/ActionsBar';
+import AlertsBar from '../../components/AlertsBar';
 import ModalAddCategory from '../../components/Categories/ModalAddCategory';
+import ModalDeleteCategory from '../../components/Categories/ModalDeleteCategory';
 import ModalEditCategory from '../../components/Categories/ModalEditCategory';
 import ModalShowCategory from '../../components/Categories/ModalShowCategory';
 import TableCategories from '../../components/Categories/TableCategories';
@@ -16,22 +18,38 @@ interface ICategory {
 
 const Categories: React.FC = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [typeAlert, setTypeAlert] = useState('');
+  const [messageAlert, setMessageAlert] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [showModalOpen, setShowModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<ICategory>(
     {} as ICategory,
   );
 
+  function clearAlert(): void {
+    setTypeAlert('');
+    setMessageAlert('');
+  }
+
   function toggleModal(): void {
+    clearAlert();
     setModalOpen(!modalOpen);
   }
 
+  function toggleDeleteModal(): void {
+    clearAlert();
+    setDeleteModalOpen(!deleteModalOpen);
+  }
+
   function toggleEditModal(): void {
+    clearAlert();
     setEditModalOpen(!editModalOpen);
   }
 
   function toggleShowModal(): void {
+    clearAlert();
     setShowModalOpen(!showModalOpen);
   }
 
@@ -42,18 +60,34 @@ const Categories: React.FC = () => {
       const response = await api.post('categories', category);
 
       setCategories([...categories, response.data]);
+
+      setTypeAlert('success');
+      setMessageAlert('Categoria criada com sucesso.');
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      setTypeAlert('error');
+      setMessageAlert(`Erro ao cadastrar a categoria ${err}`);
     }
   }
 
-  async function handleDeleteCategory(id: number): Promise<void> {
-    await api.delete(`/categories/${id}`);
+  function handleConfirmDeleteCategory(category: ICategory): void {
+    setSelectedCategory(category);
+    setDeleteModalOpen(true);
+  }
 
-    const updatedState = categories.filter(category => category.id !== id);
+  async function handleDeleteCategory(category: ICategory): Promise<void> {
+    try {
+      await api.delete(`/categories/${category.id}`);
 
-    setCategories(updatedState);
+      const updatedState = categories.filter(item => item.id !== category.id);
+
+      setCategories(updatedState);
+
+      setTypeAlert('success');
+      setMessageAlert('Categoria deletada com sucesso.');
+    } catch (err) {
+      setTypeAlert('error');
+      setMessageAlert(`Erro ao deletar a categoria ${err}`);
+    }
   }
 
   function handleEditCategory(category: ICategory): void {
@@ -69,18 +103,26 @@ const Categories: React.FC = () => {
   async function handleUpdateCategory(
     category: Omit<ICategory, 'id'>,
   ): Promise<void> {
-    const { id } = selectedCategory;
+    try {
+      const { id } = selectedCategory;
 
-    const updatedCategory = { id, ...category };
+      const updatedCategory = { id, ...category };
 
-    const response = await api.put(
-      `/categories/${selectedCategory.id}`,
-      updatedCategory,
-    );
+      const response = await api.put(
+        `/categories/${selectedCategory.id}`,
+        updatedCategory,
+      );
 
-    const updatedState = categories.filter(item => item.id !== id);
+      const updatedState = categories.filter(item => item.id !== id);
 
-    setCategories([...updatedState, response.data]);
+      setCategories([...updatedState, response.data]);
+
+      setTypeAlert('success');
+      setMessageAlert('Categoria atualizada com sucesso.');
+    } catch (err) {
+      setTypeAlert('error');
+      setMessageAlert(`Erro ao atualizar a categoria ${err}`);
+    }
   }
 
   useEffect(() => {
@@ -90,7 +132,7 @@ const Categories: React.FC = () => {
       });
     }
     loadData();
-  }, [setCategories]);
+  }, [categories]);
 
   return (
     <Container>
@@ -100,10 +142,12 @@ const Categories: React.FC = () => {
 
       <ActionsBar openModal={toggleModal} />
 
+      {messageAlert && <AlertsBar type={typeAlert} message={messageAlert} />}
+
       <TableCategories
         data={categories}
         handleEditCategory={handleEditCategory}
-        handleDeleteCategory={handleDeleteCategory}
+        handleConfirmDeleteCategory={handleConfirmDeleteCategory}
         handleShowCategory={handleShowCategory}
       />
 
@@ -111,6 +155,13 @@ const Categories: React.FC = () => {
         isOpen={modalOpen}
         setIsOpen={toggleModal}
         handleAddCategory={handleAddCategory}
+      />
+
+      <ModalDeleteCategory
+        isOpen={deleteModalOpen}
+        setIsOpen={toggleDeleteModal}
+        selectedCategory={selectedCategory}
+        handleDeleteCategory={handleDeleteCategory}
       />
 
       <ModalEditCategory

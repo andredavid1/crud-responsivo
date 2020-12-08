@@ -1,6 +1,5 @@
 import React, { useRef, useCallback } from 'react';
 
-import { FiCheckSquare } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from './styles';
 import Modal from '../../Modal';
@@ -46,18 +45,29 @@ const ModalEditCategory: React.FC<IModalProps> = ({
         initialData={selectedCategory}
       >
         <h1>Editar categoria</h1>
-        <Input name="name" placeholder="Categoria" />
 
-        <button
-          type="submit"
-          data-testid="edit-category-button"
-          title="Atualizar"
-        >
-          <div className="text">Atualizar</div>
-          <div className="icon">
-            <FiCheckSquare size={18} />
-          </div>
-        </button>
+        <Input name="name" label="Nome" placeholder="Categoria" />
+
+        <div className="btnModal">
+          <button
+            className="btnRed"
+            data-testid="noShow-category-button"
+            title="cancelar"
+            type="button"
+            onClick={setIsOpen}
+          >
+            <p className="text">Cancelar</p>
+          </button>
+
+          <button
+            className="btnGreen"
+            data-testid="edit-category-button"
+            title="atualizar"
+            type="submit"
+          >
+            <p className="text">Atualizar</p>
+          </button>
+        </div>
       </Form>
     </Modal>
   );

@@ -13,14 +13,14 @@ interface ICategory {
 interface IProps {
   data: ICategory[];
   handleEditCategory: (category: ICategory) => void;
-  handleDeleteCategory: (category: number) => void;
+  handleConfirmDeleteCategory: (category: ICategory) => void;
   handleShowCategory: (category: ICategory) => void;
 }
 
 const TableCategories: React.FC<IProps> = ({
   data,
   handleEditCategory,
-  handleDeleteCategory,
+  handleConfirmDeleteCategory,
   handleShowCategory,
 }) => {
   return (
@@ -34,9 +34,9 @@ const TableCategories: React.FC<IProps> = ({
           </tr>
         </thead>
         <tbody>
-          {!data && (
+          {!data.length && (
             <tr>
-              <td colSpan={3}>Nenum registro foi encontrado.</td>
+              <td colSpan={3}>Nenhum registro foi encontrado.</td>
             </tr>
           )}
 
@@ -68,7 +68,7 @@ const TableCategories: React.FC<IProps> = ({
                     type="button"
                     title="excluir"
                     onClick={() => {
-                      handleDeleteCategory(category.id);
+                      handleConfirmDeleteCategory(category);
                     }}
                   >
                     <FaTrashAlt />

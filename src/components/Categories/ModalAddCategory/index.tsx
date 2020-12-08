@@ -1,6 +1,5 @@
 import React, { useRef, useCallback } from 'react';
 
-import { FiCheckSquare } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 // import { Form } from '@unform/web';
 import Modal from '../../Modal';
@@ -42,14 +41,29 @@ const ModalAddCategory: React.FC<IModalProps> = ({
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <h1>Cadastrar categoria</h1>
-        <Input name="name" placeholder="categoria" />
 
-        <button type="submit" data-testid="add-category-button">
-          <p className="text">Salvar</p>
-          <div className="icon">
-            <FiCheckSquare size={18} />
-          </div>
-        </button>
+        <Input name="name" label="Nome" placeholder="nome da categoria" />
+
+        <div className="btnModal">
+          <button
+            className="btnRed"
+            data-testid="noShow-category-button"
+            title="cancelar"
+            type="button"
+            onClick={setIsOpen}
+          >
+            <p className="text">Cancelar</p>
+          </button>
+
+          <button
+            className="btnGreen"
+            title="salvar"
+            type="submit"
+            data-testid="add-category-button"
+          >
+            <p className="text">Salvar</p>
+          </button>
+        </div>
       </Form>
     </Modal>
   );
