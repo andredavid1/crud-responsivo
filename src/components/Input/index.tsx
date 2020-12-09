@@ -45,7 +45,7 @@ const Input: React.FC<IInputProps> = ({ name, label, icon: Icon, ...rest }) => {
 
   return (
     <Container>
-      <Label>{label}</Label>
+      <Label>{`${label}:`}</Label>
       <InputContainer isFilled={isFilled} isFocused={isFocused}>
         {Icon && <Icon size={20} />}
 
